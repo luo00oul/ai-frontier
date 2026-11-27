@@ -14,7 +14,7 @@ app = out/'assets/app.js'
 app.write_text(app.read_text().replace('__CONTENT_VERSION__', content_version))
 index = out/'index.html'
 html = index.read_text()
-for asset in ('assets/app.js', 'assets/style.css'):
+for asset in ('assets/app.js', 'assets/style.css', 'assets/math.js', 'assets/math.css'):
     digest = hashlib.sha256((out/asset).read_bytes()).hexdigest()[:12]
     html = html.replace(f'"{asset}"', f'"{asset}?v={digest}"')
 index.write_text(html)

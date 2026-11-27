@@ -1,0 +1,99 @@
+/* KaTeX 0.16.x presentation. Load after KaTeX CSS and the site's base stylesheet. */
+:root {
+  --math-bg: #eef1ed;
+  --math-border: #355c49;
+  --math-ink: #242a27;
+  --math-muted: #59665e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --math-bg: #202b25;
+    --math-border: #a4c8b1;
+    --math-ink: #e1e7e2;
+    --math-muted: #a3b1a9;
+  }
+}
+.katex { font-size: 1.08em; color: inherit; }
+.katex-display {
+  display: block;
+  max-width: 100%;
+  margin: 1.5rem 0;
+  padding: .25rem 0 .75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+}
+.katex-display > .katex {
+  display: block;
+  min-width: max-content;
+  text-align: center;
+}
+.formula.key-formula {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border: 0;
+  border-left: 3px solid var(--math-border);
+  background: var(--math-bg);
+  color: var(--math-ink);
+  overflow: visible;
+  font: 400 var(--font-body-size, 1.125rem)/1.8 var(--font-body, system-ui, sans-serif);
+}
+.key-formula > .formula-label {
+  margin: 0 0 .75rem;
+  color: var(--math-muted);
+  font: 500 .875rem/1.6 var(--font-body, system-ui, sans-serif);
+}
+.formula-scroll {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: .5rem .25rem .75rem;
+  scrollbar-width: thin;
+  overscroll-behavior-inline: contain;
+}
+.formula-scroll:focus-visible {
+  outline: 2px solid var(--math-border);
+  outline-offset: 3px;
+}
+.formula-scroll > span { display: block; }
+.formula-scroll .katex-display {
+  min-width: max-content;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+.symbols-title {
+  margin: 1rem 0 .5rem;
+  color: var(--math-muted);
+  font-size: .875rem;
+  font-weight: 500;
+}
+.math-symbols { margin: 0; font-size: .875rem; line-height: 1.8; }
+.math-symbols > div {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, max-content) minmax(0, 1fr);
+  gap: .5rem 1rem;
+  padding: .5rem 0;
+  border-top: 1px solid var(--border, #d5dcd5);
+}
+.math-symbols dt { margin: 0; color: var(--math-ink); }
+.math-symbols dd { margin: 0; color: var(--math-muted); overflow-wrap: anywhere; }
+.math-status {
+  margin: .75rem 0 0;
+  color: var(--math-muted);
+  font-size: .875rem;
+}
+.math-status[hidden] { display: none !important; }
+.katex-error { color: var(--math-muted) !important; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .formula.key-formula { padding: 1rem .75rem; }
+  .math-symbols > div { grid-template-columns: minmax(4.5rem, max-content) minmax(0, 1fr); gap: .5rem .75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .formula-scroll, .katex-display { scroll-behavior: auto; }
+}
