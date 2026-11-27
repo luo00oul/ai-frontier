@@ -43,4 +43,9 @@ python3 site/practice/world_model.py
 
 ## 发布状态
 
-工程已准备，但工程中的工作流文件本身不能证明 GitHub 仓库、Pages 或每周自动化已启用。只有远程写入、Actions 成功和公开 URL 实测后，才能宣布上线。实际状态请以本次交付说明和 GitHub Actions 为准。
+- 公开网站：https://luo00oul.github.io/ai-frontier/
+- 源码仓库：https://github.com/luo00oul/ai-frontier
+- 2026-11-27 已启用 GitHub Pages（GitHub Actions 源），首次部署成功；已在公开地址检查首页、专题、归档和交互实验。
+- 推送 main 会运行校验与 Pages 部署，结果以 Actions 为准。
+- 每周五 19:00 Asia/Shanghai 的原 ChatGPT 任务在本次查询中不可见，未创建重复任务，亦未声称已经接通定时研究与自动提交。
+- `Import issue and publish` 为已配置的授权发布入口，仍需一次实际内容导入验证，不能把入口存在等同于周更已启用。
