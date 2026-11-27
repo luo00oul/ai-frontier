@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "topics": [
+    {
+      "id": "ai-frontier",
+      "name": "AI 前沿探索",
+      "description": "从核心问题到动手实践，每期理解一个研究方向。"
+    }
+  ],
+  "issues": [
+    {
+      "id": "2026-11-27-world-models",
+      "topic": "ai-frontier",
+      "date": "2026-11-27",
+      "checkedAt": "2026-11-27",
+      "number": 1,
+      "title": "世界模型：让 AI 预测行动的后果",
+      "subtitle": "从“看见世界”到“在想象中试错”，探索智能体如何学会下一步。",
+      "summary": "用一个能在浏览器里训练的小模型，理解状态、行动、预测与规划；再沿着 World Models、Dreamer 和 Genie 的线索，看清研究进展与能力边界。",
+      "tags": [
+        "世界模型",
+        "具身智能",
+        "强化学习"
+      ],
+      "minutes": 15,
+      "level": "入门到进阶",
+      "sections": [
+        {
+          "id": "question",
+          "title": "核心问题",
+          "paragraphs": [
+            "如果机器人想把杯子推到桌边，它需要先估计：向右推一下，杯子会移动多少？世界模型把这类问题写成“给定历史观察和行动，预测接下来会发生什么”。预测结果可以供规划器比较候选行动，也可以成为策略训练的想象环境。",
+            "阅读本期时抓住三个问题：模型预测的是像素、隐状态还是奖励？行动如何进入预测过程？预测得像，是否真的有助于完成任务？World Models 展示了压缩环境表示与在模型内部训练策略的思路；DreamerV3 则把学习动力学和想象中的策略改进结合起来。"
+          ],
+          "sources": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "principle",
+          "title": "技术原理",
+          "paragraphs": [
+            "一条常见路线先用编码器把观察 o_t 压缩成隐状态 z_t，再用动力学模型 f 根据 z_t 与行动 a_t 预测后继状态。训练数据来自与真实环境的交互；优化目标可以包括观察重建、奖励预测以及潜在状态的一致性。具体目标取决于模型，这里给的是理解框架。",
+            "控制时，在模型内展开多个候选行动序列，比较预测回报，执行其中一个行动后再观察、再规划。这解释了为什么单步预测准确还不够：连续使用自己预测的状态，会把小误差带进后续每一步。",
+            "Genie（2024）的另一条线索是从没有行动标签的视频中学习潜在行动。论文组合了时空视频分词器、自回归动力学模型和潜在行动模型，让生成环境能够逐帧接受控制。不要将这个公开的初代结构直接视为后续 Genie 版本的完整技术说明。"
+          ],
+          "formula": "z_t = encode(o_≤t)    ·    ẑ_(t+1) = f(z_t, a_t)",
+          "sources": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "progress",
+          "title": "近期进展",
+          "items": [
+            "2026-11-18｜Google 官方宣布向符合条件的 AI Ultra 订阅者推出 Genie 4，并介绍实时文本修改、原生音频和社区分享。这是产品公告描述的开放范围，访问资格仍以官方页面为准。 [5]",
+            "2026-10-27｜DeepMind 公布 Genie 4，介绍交互模拟、音频与角色对话。这里记录的是团队报告的能力，没有把演示等同于独立物理基准测试。 [4]",
+            "2026-10-26｜WorldArena 2.0 的 arXiv v2 更新。其评估范围包含视觉与触觉、交互式策略优化，以及模拟和真实机器人平台，提供了比单看视频观感更接近任务效用的观察角度。 [6]"
+          ],
+          "paragraphs": [
+            "编辑判断：值得追踪的变化是评估重心从“能生成什么”走向“交互是否有效、策略是否获益”。这是本期基于上述材料的观察，不是这些工作已经实现通用机器人能力的结论。"
+          ],
+          "sources": [
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "id": "papers",
+          "title": "代表论文与团队",
+          "items": [
+            "World Models（2018）｜David Ha、Jürgen Schmidhuber。先读压缩表示、时序预测和控制器如何分工，适合建立概念。 [1]",
+            "Mastering Diverse Domains through World Models / DreamerV3（2023 提交，2024 修订）｜Danijar Hafner、Jurgis Pasukonis、Jimmy Ba、Timothy Lillicrap。重点看模型内想象与跨任务稳定学习。 [2]",
+            "Genie: Generative Interactive Environments（2024）｜Jake Bruce 等，Google DeepMind。重点看没有真实行动标签时如何获得可控的潜在行动空间。 [3]",
+            "WorldArena 2.0（2026）｜Zhuohang Li、Yiding Ma、Yu Shang 等多机构作者团队。重点读评估维度与实验协议，不只比较生成视频的视觉质量。 [6]"
+          ],
+          "sources": [
+            1,
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "id": "applications",
+          "title": "产业应用",
+          "paragraphs": [
+            "交互内容原型：Project Genie 提供了一个具体产品案例，用自然语言创建和探索交互世界。它适合观察创意工具的交互方式，产品演示本身不能证明真实世界物理预测的可靠性。 [5]",
+            "机器人与智能体训练：在预测环境内反复试验，可以减少部分真实交互成本。Dreamer 的想象学习与 WorldArena 的策略优化评估给出了研究依据；落地仍需要在目标设备、传感器和环境中单独验证。 [2][6]",
+            "可尝试的课程项目（编辑建议）：先做二维导航或小车模型，将随机策略、无模型策略和模型规划放在相同真实交互预算下比较。记录成功率、碰撞次数和多步误差，形成可复现的小报告。"
+          ],
+          "sources": [
+            2,
+            5,
+            6
+          ]
+        },
+        {
+          "id": "open",
+          "title": "未解决问题",
+          "items": [
+            "长程误差：递归预测会累积偏差。本期实验让你主动偏移模型参数，观察十步误差如何放大；这只是一个简化示例。",
+            "任务效用：图像好看与行动正确是不同评估维度。把预测质量、交互收益和跨平台表现分开测，避免用一段演示替代任务基准。 [6]",
+            "分布变化：训练环境中少见的障碍、接触或动作，可能让规划器选择现实中行不通的路线。课程实验可改变真实动力学，再检查模型是否失效。",
+            "研究材料边界：官方产品公告并未在本期引用材料中给出完整可复现实验协议。对成本、物理正确性与迁移效果的判断，应等待具体技术资料或自行测量。"
+          ],
+          "sources": [
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "id": "learning",
+          "title": "入门路线",
+          "items": [
+            "第一步 · 建立直觉（约 30 分钟）：阅读 World Models 摘要，画出观察、状态、行动、下一状态四者的关系。解释预测模型和策略的职责。 [1]",
+            "第二步 · 跑通最小实验（约 30 分钟）：运行下方实验，训练参数，比较单步误差与十步累计误差。保存你的观察。",
+            "第三步 · 读懂方法（约 2 小时）：选读 DreamerV3，追踪一批真实轨迹如何变成模型内想象轨迹；再读 Genie，比较真实行动与潜在行动。 [2][3]",
+            "第四步 · 做一次对照（约半天）：给最小环境加入噪声或改变动力学。在同一批测试行动上比较结果，说明数据分布、模型假设与结论的适用范围。以上时长仅为学习安排建议。"
+          ],
+          "sources": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "practice",
+          "title": "可运行实践",
+          "paragraphs": [
+            "下面是本站编写的教学实验，不是 Genie 或 Dreamer 的复现。环境只有一个位置 x，真实变化为 Δx = 0.8a + 0.1。用 30 个固定行动样本，通过最小二乘学习 Δx = wa + b。无需 API、安装依赖或 GPU，计算完全在浏览器中执行。",
+            "先运行未训练模型，观察误差；再点击“训练模型”并重新运行。因为本例没有噪声、假设恰好正确，训练后会非常准确。试着增加“模型偏移”，观察即使单步误差很小，十步之后也会产生明显偏差。这个结果不能外推到高维视频或真实机器人。"
+          ],
+          "practice": true,
+          "sources": []
+        }
+      ],
+      "sources": [
+        {
+          "id": 1,
+          "title": "World Models",
+          "publisher": "David Ha & Jürgen Schmidhuber · arXiv",
+          "date": "2018-03-27",
+          "url": "https://arxiv.org/abs/1803.10122",
+          "kind": "论文"
+        },
+        {
+          "id": 2,
+          "title": "Mastering Diverse Domains through World Models",
+          "publisher": "Hafner et al. · arXiv",
+          "date": "2024-04-17",
+          "url": "https://arxiv.org/abs/2301.04104",
+          "kind": "论文 · v2"
+        },
+        {
+          "id": 3,
+          "title": "Genie: Generative Interactive Environments",
+          "publisher": "Bruce et al. · Google DeepMind / arXiv",
+          "date": "2024-02-23",
+          "url": "https://arxiv.org/abs/2402.15391",
+          "kind": "论文"
+        },
+        {
+          "id": 4,
+          "title": "Genie 4: A new generation of world simulation",
+          "publisher": "Google DeepMind",
+          "date": "2026-10-27",
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "kind": "官方研究公告"
+        },
+        {
+          "id": 5,
+          "title": "Genie 4 is now available",
+          "publisher": "Google 官方博客",
+          "date": "2026-11-18",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+          "kind": "官方产品公告"
+        },
+        {
+          "id": 6,
+          "title": "WorldArena 2.0: Extending Embodied World Model Benchmarking on Modality, Functionality and Platform",
+          "publisher": "Li et al. · arXiv",
+          "date": "2026-10-26",
+          "url": "https://arxiv.org/abs/2605.17912v2",
+          "kind": "预印本 · v2"
+        }
+      ],
+      "heroTitle": "让 AI 在行动前，\n先想象世界。"
+    }
+  ]
+}

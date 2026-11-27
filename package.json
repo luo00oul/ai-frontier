@@ -1,0 +1,1 @@
+{"name":"ai-frontier","version":"1.0.0","private":true,"description":"AI 前沿探索 — 原生中文静态网站","scripts":{"build":"python3 scripts/build.py","check":"node --check site/assets/app.js && python3 scripts/build.py && python3 site/practice/world_model.py"}}
