@@ -11,7 +11,8 @@ shutil.copytree(root/'site', out)
 # Version both application assets and content so browsers do not reuse a prior issue.
 content_version = hashlib.sha256((out/'data/issues.json').read_bytes()).hexdigest()[:12]
 app = out/'assets/app.js'
-app.write_text(app.read_text().replace('__CONTENT_VERSION__', content_version))
+app.write_text(app.read_text().replace("fetch('data/issues.json',",
+                                      f"fetch('data/issues.json?v={content_version}',"))
 index = out/'index.html'
 html = index.read_text()
 for asset in ('assets/app.js', 'assets/style.css', 'assets/math.js', 'assets/math.css'):
